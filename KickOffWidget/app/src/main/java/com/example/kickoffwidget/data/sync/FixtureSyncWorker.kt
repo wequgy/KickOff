@@ -24,6 +24,9 @@ class FixtureSyncWorker(
             // Trigger Glance widget update
             KickoffWidget().updateAll(context)
             
+            // Update Notification Widget
+            com.example.kickoffwidget.utils.NotificationHelper.updateNotification(context, state)
+            
             // Schedule the next one-off countdown refresh if needed
             if (state is MatchCardState.Match) {
                 FixtureSyncScheduler.scheduleOneTimeTick(context, state)

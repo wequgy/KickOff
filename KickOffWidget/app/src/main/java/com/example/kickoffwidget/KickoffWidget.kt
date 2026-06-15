@@ -398,6 +398,7 @@ class CycleMatchActionCallback : ActionCallback {
             )
             settings.saveMatchState(updatedState)
             KickoffWidget().updateAll(context)
+            com.example.kickoffwidget.utils.NotificationHelper.updateNotification(context, updatedState)
         }
     }
 }

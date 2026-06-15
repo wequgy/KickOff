@@ -45,12 +45,13 @@ class MainScreenViewModel(application: Application) : AndroidViewModel(applicati
             _isSyncing.value = true
             _syncError.value = null
             try {
-                repository.fetchNextMatchCard()
+                val state = repository.fetchNextMatchCard()
                 try {
                     com.example.kickoffwidget.KickoffWidget().updateAll(getApplication())
                 } catch (e: Exception) {
                     android.util.Log.e("MainScreenViewModel", "Failed to update widget in manual sync", e)
                 }
+                com.example.kickoffwidget.utils.NotificationHelper.updateNotification(getApplication(), state)
             } catch (e: Exception) {
                 _syncError.value = e.message ?: "Failed to synchronize data"
             } finally {
@@ -85,6 +86,7 @@ class MainScreenViewModel(application: Application) : AndroidViewModel(applicati
                 } catch (e: Exception) {
                     android.util.Log.e("MainScreenViewModel", "Failed to update widget", e)
                 }
+                com.example.kickoffwidget.utils.NotificationHelper.updateNotification(getApplication(), updatedState)
             }
         }
     }
@@ -114,6 +116,7 @@ class MainScreenViewModel(application: Application) : AndroidViewModel(applicati
                 } catch (e: Exception) {
                     android.util.Log.e("MainScreenViewModel", "Failed to update widget", e)
                 }
+                com.example.kickoffwidget.utils.NotificationHelper.updateNotification(getApplication(), updatedState)
             }
         }
     }

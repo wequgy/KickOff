@@ -13,6 +13,15 @@ class KickoffWidgetReceiver : GlanceAppWidgetReceiver() {
         FixtureSyncScheduler.start(context)
     }
 
+    override fun onUpdate(
+        context: Context,
+        appWidgetManager: android.appwidget.AppWidgetManager,
+        appWidgetIds: IntArray
+    ) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds)
+        FixtureSyncScheduler.start(context)
+    }
+
     override fun onDisabled(context: Context) {
         FixtureSyncScheduler.stop(context)
         super.onDisabled(context)

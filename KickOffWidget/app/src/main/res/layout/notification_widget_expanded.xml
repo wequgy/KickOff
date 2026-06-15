@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@android:color/transparent"
+    android:padding="0dp">
+
+    <!-- Background Image with negative margins to clip rounded corners -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="-12dp"
+        android:layout_marginTop="-12dp"
+        android:layout_marginEnd="-12dp"
+        android:layout_marginBottom="-12dp"
+        android:src="@drawable/widget_card_background"
+        android:scaleType="centerCrop" />
+
+    <!-- Dim Overlay -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/widget_background_dim" />
+
+    <!-- Main Content Area -->
+    <LinearLayout
+        android:id="@+id/main_content_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_strip"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <!-- Home Team -->
+        <LinearLayout
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/widget_flag_container">
+
+                <ImageView
+                    android:id="@+id/home_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="1.5dp"
+                    android:layout_marginTop="1.5dp"
+                    android:layout_marginEnd="4.5dp"
+                    android:layout_marginBottom="4.5dp"
+                    android:scaleType="fitCenter" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/home_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/on_primary"
+                android:textStyle="bold"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Spacer -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <!-- Center Section (Countdown Pill & Live Status) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Countdown/Score Pill -->
+            <ImageView
+                android:id="@+id/countdown_pill"
+                android:layout_width="94dp"
+                android:layout_height="38dp"
+                android:scaleType="fitCenter" />
+
+            <!-- Live Status Capsule -->
+            <FrameLayout
+                android:id="@+id/live_badge_container"
+                android:layout_width="76dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/widget_live_badge_container"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:paddingEnd="1.5dp"
+                    android:paddingBottom="1.5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="● "
+                        android:textColor="@color/live_red"
+                        android:textStyle="bold"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:id="@+id/live_badge_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/live_red"
+                        android:textStyle="bold"
+                        android:textSize="8sp" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Regular Caption when not live -->
+            <TextView
+                android:id="@+id/caption_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/surface_container_low"
+                android:textStyle="bold"
+                android:textSize="9sp" />
+        </LinearLayout>
+
+        <!-- Spacer -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <!-- Away Team -->
+        <LinearLayout
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/widget_flag_container">
+
+                <ImageView
+                    android:id="@+id/away_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="1.5dp"
+                    android:layout_marginTop="1.5dp"
+                    android:layout_marginEnd="4.5dp"
+                    android:layout_marginBottom="4.5dp"
+                    android:scaleType="fitCenter" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/away_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/on_primary"
+                android:textStyle="bold"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Bottom Green Strip -->
+    <RelativeLayout
+        android:id="@+id/bottom_strip"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/notification_bottom_strip"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <!-- Venue Name -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_stadium" />
+
+            <TextView
+                android:id="@+id/venue_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/secondary_fixed"
+                android:textStyle="bold"
+                android:textSize="9sp" />
+        </LinearLayout>
+
+        <!-- Group / Round Badge -->
+        <FrameLayout
+            android:id="@+id/group_badge_container"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/widget_group_badge_container">
+
+            <TextView
+                android:id="@+id/group_badge_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp"
+                android:textColor="@color/on_secondary_fixed_variant"
+                android:textStyle="bold"
+                android:textSize="8sp" />
+        </FrameLayout>
+    </RelativeLayout>
+</RelativeLayout>
