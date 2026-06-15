@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">KickOffWidget</string>
+    <string name="widget_label">KickOff Widget</string>
+    <string name="widget_description">Displays the countdown and score for the upcoming World Cup match.</string>
+</resources>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Group Standings - KickOff</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800&amp;family=Hanken+Grotesk:wght@500;700&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Grain/Texture Overlay */
+        .texture-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Ribbon Arc Path for Titles */
+        .ribbon-title {
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        }
+        
+        /* Custom Scrollbar for Web */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff8ef; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d8c3ad; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #867461; 
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#865300",
+                        "inverse-on-surface": "#f8f0e1",
+                        "tertiary-container": "#9eb1c8",
+                        "secondary": "#006d38",
+                        "surface-bright": "#fff8ef",
+                        "surface-container-low": "#fbf3e4",
+                        "secondary-fixed": "#96f7b0",
+                        "on-tertiary-container": "#324457",
+                        "secondary-fixed-dim": "#7bda96",
+                        "on-tertiary-fixed-variant": "#36485c",
+                        "outline-variant": "#d8c3ad",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#865300",
+                        "surface-container-high": "#efe7d9",
+                        "on-surface-variant": "#534434",
+                        "on-background": "#1e1b13",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#e1d9cb",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e9e2d3",
+                        "tertiary-fixed-dim": "#b5c8e0",
+                        "on-surface": "#1e1b13",
+                        "background": "#fff8ef",
+                        "secondary-container": "#94f4ad",
+                        "primary-fixed": "#ffddb9",
+                        "primary-fixed-dim": "#ffb961",
+                        "on-primary-fixed": "#2b1700",
+                        "on-secondary-container": "#00723a",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#603a00",
+                        "surface-container-highest": "#e9e2d3",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#d1e4fc",
+                        "outline": "#867461",
+                        "surface-container": "#f5edde",
+                        "primary-container": "#f39c12",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#ffb961",
+                        "on-tertiary-fixed": "#091d2e",
+                        "surface": "#fff8ef",
+                        "inverse-surface": "#343026",
+                        "on-secondary-fixed": "#00210d",
+                        "on-secondary-fixed-variant": "#005228",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#663e00",
+                        "tertiary": "#4e6074",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "section-gap": "40px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Hanken Grotesk"],
+                        "title-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Bricolage Grotesque"],
+                        "display-lg": ["Bricolage Grotesque"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Bricolage Grotesque"],
+                        "label-data": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "label-data": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<div class="texture-overlay"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface-container-low border-b-4 border-primary shadow-[4px_4px_0px_0px_rgba(0,109,56,1)] transition-all duration-100">
+<button aria-label="menu" class="text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container p-2 rounded-full active:translate-y-1 transition-all duration-100 hidden md:flex">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="font-display-lg text-headline-lg-mobile text-primary tracking-tighter uppercase mx-auto md:mx-0">
+            KickOff
+        </div>
+<!-- Web Desktop Navigation (Hidden on Mobile) -->
+<nav class="hidden md:flex gap-6 absolute left-1/2 transform -translate-x-1/2">
+<a class="text-on-surface-variant font-body-md uppercase tracking-wider hover:bg-primary-container hover:text-on-primary-container px-3 py-1 rounded-full transition-all" href="#">Home</a>
+<a class="text-on-surface-variant font-body-md uppercase tracking-wider hover:bg-primary-container hover:text-on-primary-container px-3 py-1 rounded-full transition-all" href="#">Fixtures</a>
+<a class="text-on-surface-variant font-body-md uppercase tracking-wider hover:bg-primary-container hover:text-on-primary-container px-3 py-1 rounded-full transition-all" href="#">Live</a>
+<a class="text-primary font-bold font-body-md uppercase tracking-wider px-3 py-1 rounded-full bg-primary-container text-on-primary-container shadow-[2px_2px_0px_0px_rgba(43,23,0,1)]" href="#">Table</a>
+</nav>
+<button aria-label="User profile" class="text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container p-2 rounded-full active:translate-y-1 transition-all duration-100">
+<div class="w-8 h-8 rounded-full bg-tertiary-container overflow-hidden border-2 border-outline">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf6fEIzpnHHHA9mAL1v2sGQcyf_GgSsMdNxMj9LPedqcNMPa19rmrQoAmQUP6pKECE_gp98uqv3R2hpiLbKzqqh-D_Ls38VgQ7ULeB1EUyT6rHM11JEGEzmR5Zrs1bGhjdHO6W_WjtpKTAE9a1O7GanWw0tcb_uFMaeubhA_Exw6T24uozKBjSxHD9cHMkYIHTpNWd7mhPXVAt7OERotYHv0vsKaAWoP82KycKKi1ZUf_8_Xe5G33IdR9tMt0Ojj3Hbr113Up5wdqU"/>
+</div>
+</button>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-32 px-container-margin max-w-[1200px] mx-auto fluid-grid relative">
+<!-- Page Header Ribbon -->
+<div class="mb-8 relative z-10 flex justify-center md:justify-start">
+<div class="bg-secondary text-on-secondary px-8 py-3 border-2 border-on-secondary-fixed shadow-[6px_6px_0px_0px_rgba(0,33,13,1)] transform -rotate-2 inline-block">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg uppercase tracking-wider">Group Standings</h1>
+</div>
+<!-- Decorative botanical element near header -->
+<svg class="absolute -right-4 -bottom-6 w-16 h-16 text-primary pointer-events-none hidden md:block" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11v6h2v-6h-2zm0-4v2h2V7h-2z"></path>
+</svg>
+</div>
+<!-- Groups Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- GROUP A CARD -->
+<article class="bg-surface-container-low border-2 border-outline shadow-[6px_6px_0px_0px_rgba(30,27,19,1)] rounded-lg overflow-hidden relative">
+<!-- Header -->
+<header class="bg-primary text-on-primary p-4 border-b-2 border-outline relative overflow-hidden flex items-center justify-between">
+<h2 class="font-headline-lg-mobile md:text-headline-lg uppercase z-10">Group A</h2>
+<span class="material-symbols-outlined text-4xl opacity-50 absolute right-4 -bottom-2 transform rotate-12 z-0" data-icon="public">public</span>
+</header>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b-2 border-outline-variant font-label-data text-on-surface-variant text-xs uppercase bg-surface-container">
+<th class="p-3 w-8 text-center">#</th>
+<th class="p-3">Team</th>
+<th class="p-3 text-center" title="Played">P</th>
+<th class="p-3 text-center" title="Won">W</th>
+<th class="p-3 text-center" title="Drawn">D</th>
+<th class="p-3 text-center" title="Lost">L</th>
+<th class="p-3 text-center" title="Goal Difference">GD</th>
+<th class="p-3 text-center font-bold">Pts</th>
+</tr>
+</thead>
+<tbody class="font-body-md">
+<!-- Qualifying Row 1 -->
+<tr class="bg-secondary-container/30 border-b border-outline-variant border-l-4 border-l-primary relative">
+<td class="p-3 font-label-data text-center font-bold text-on-surface">1</td>
+<td class="p-3 flex items-center gap-3 font-title-md text-on-surface whitespace-nowrap">
+<div class="w-8 h-8 rounded-full bg-surface overflow-hidden border-2 border-outline shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)] shrink-0">
+<img alt="Ecuador Flag" class="w-full h-full object-cover" data-alt="A small circular emblem displaying the vibrant yellow, blue, and red horizontal stripes of the Ecuadorian flag. The colors are highly saturated and slightly textured, matching a hand-drawn Risograph aesthetic. The emblem is cleanly framed with a dark, solid border, presenting a stylized national symbol suitable for a sports team badge in a light-mode UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy9l7EHz5D_W52EQF9WVLk6SGoh3z9d2guOKmwHBEzTzE8FY6RScLW0XzNNQO-2c9uIPlAqQirkaNptQp_RvdbHGO0NnBDzbJv_Bm5gLV_JHAXye_Gfvd4BocyO2jsOwAgUZXWwmMaOuJpbr5VcaHJMSPrX5tO1ZF1UfqWxWgyXUt5-Dn0ICSnkj0gP2EahO5Yra7U6LEIo0W30B1UGr8ZO81ULzuPLeClRG4obC4TJW3rNLw1QE2thzdOPhzEoJQJtGgFBbE8tgZb"/>
+</div>
+                                    Ecuador
+                                </td>
+<td class="p-3 text-center font-label-data">3</td>
+<td class="p-3 text-center font-label-data">2</td>
+<td class="p-3 text-center font-label-data">1</td>
+<td class="p-3 text-center font-label-data">0</td>
+<td class="p-3 text-center font-label-data">+4</td>
+<td class="p-3 text-center font-label-data font-bold text-primary text-base">7</td>
+</tr>
+<!-- Qualifying Row 2 -->
+<tr class="bg-secondary-container/10 border-b border-outline-variant border-l-4 border-l-primary/60">
+<td class="p-3 font-label-data text-center font-bold text-on-surface">2</td>
+<td class="p-3 flex items-center gap-3 font-title-md text-on-surface whitespace-nowrap">
+<div class="w-8 h-8 rounded-full bg-surface overflow-hidden border-2 border-outline shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)] shrink-0">
+<img alt="Netherlands Flag" class="w-full h-full object-cover" data-alt="A small circular emblem featuring the bold red, white, and blue horizontal stripes of the Netherlands flag. The colors are vibrant with a subtle stippled texture, conveying a crafted, muralist feel. The circular badge is outlined with a thick, hand-drawn style dark border, perfect for a lively, World Cup-themed sports application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzTVahcSTaEhYhzOH-hd_r6EClxbq0vHgvWwuR7SuemUKkUiAAzoKNsrIgQQK_ni4XEvhfX5Uo2p_7Ap_21LtU-CstInQEvhu_PSX6R1sYHVfJO2hFbF8N53Fhw6uCHm5_uHrtwaeWQ76jPCVqJF6ruCc5TKG5dyZknLckS6TQlQMBuhHab7hjL1oBrlha8qw00GBP1FcxRbYKmFfuKOLWPk4t_sOSaAsmiBmFw-DQ4DdKsGjiputPJzaR-uaVZssBG8luvZkEiwJd"/>
+</div>
+                                    Netherlands
+                                </td>
+<td class="p-3 text-center font-label-data">3</td>
+<td class="p-3 text-center font-label-data">1</td>
+<td class="p-3 text-center font-label-data">2</td>
+<td class="p-3 text-center font-label-data">0</td>
+<td class="p-3 text-center font-label-data">+2</td>
+<td class="p-3 text-center font-label-data font-bold text-primary text-base">5</td>
+</tr>
+<!-- Eliminated Row 1 -->
+<tr class="bg-surface-dim border-b border-outline-variant/50 border-l-4 border-l-transparent opacity-80">
+<td class="p-3 font-label-data text-center text-on-surface-variant">3</td>
+<td class="p-3 flex items-center gap-3 font-body-lg text-on-surface-variant whitespace-nowrap">
+<div class="w-8 h-8 rounded-full bg-surface overflow-hidden border border-outline opacity-80 shrink-0">
+<img alt="Senegal Flag" class="w-full h-full object-cover" data-alt="A circular flag badge representing Senegal, showing its green, yellow, and red vertical stripes with a central green star. The graphic has a slightly muted, warm terracotta undertone to signify an eliminated status, paired with a grainy, textured finish. The design fits within a bright, illustrated Latin American muralist design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVt6TiTti_Q2YtTw7LvU9i62bQCM4-QphVXbDOzaKk5_Zall8O2o2Zug7EJczCoGgDqOscbzl-flhmykmD31JBV-n8zo9olnGdxkZNIZIPiRqlrFZ_vNYVj_IEhnw6tJUIOt0uFCOQZQKtK072Uxog_Z1MGeYDvWIvl-9XuxhIOpyIzxhNsXFnc3OHo4t_JCZ6sukAt3E8ll0bPQ99OmpmVBqmXgnyU8IWyw7D3bGjK8Fdz_zD9Xc_X0d4FWdI48BNKeKtBYUnCGJw"/>
+</div>
+                                    Senegal
+                                </td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">3</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">1</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">0</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">2</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">-1</td>
+<td class="p-3 text-center font-label-data font-bold text-on-surface-variant text-base">3</td>
+</tr>
+<!-- Eliminated Row 2 -->
+<tr class="bg-surface-dim border-l-4 border-l-transparent opacity-60">
+<td class="p-3 font-label-data text-center text-on-surface-variant">4</td>
+<td class="p-3 flex items-center gap-3 font-body-lg text-on-surface-variant whitespace-nowrap">
+<div class="w-8 h-8 rounded-full bg-surface overflow-hidden border border-outline opacity-80 shrink-0">
+<img alt="Qatar Flag" class="w-full h-full object-cover" data-alt="A circular badge displaying the maroon and white serrated design of the Qatar flag. The colors are intentionally desaturated with a warm grey overlay and a risograph stipple effect, indicating a bottom-tier position in the standings. It maintains a tactile, hand-crafted aesthetic suitable for a vibrant sports interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUIFS3GfxcsJA33Vn_UQ03JZC333fSwc72ef55hKIYY4JCPFTBTYPBDBOlU1vrVuOpfVxivc9dgF5HeNoS4H-lMGpwsVnhBfe-mQTTZ-uDGUgbRfrQ0Vya_EBwRnYFY-bdPUewVrpvsW2s4BaWoeNAhQgUBLITRil59KESrORdwCY3gDN9gz6ehnFJfQTwS06LH5JTCPDCs5HUYpU6uHO2UiZrNNcTeVCrqPhiyr6stl733scctu8dtEGomz4gL36e7cNe_4Z_DJ9h"/>
+</div>
+                                    Qatar
+                                </td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">3</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">0</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">0</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">3</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">-5</td>
+<td class="p-3 text-center font-label-data font-bold text-on-surface-variant text-base">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</article>
+<!-- GROUP B CARD (Duplicate structure for visual fullness) -->
+<article class="bg-surface-container-low border-2 border-outline shadow-[6px_6px_0px_0px_rgba(30,27,19,1)] rounded-lg overflow-hidden relative">
+<header class="bg-primary-container text-on-primary-container p-4 border-b-2 border-outline relative overflow-hidden flex items-center justify-between">
+<h2 class="font-headline-lg-mobile md:text-headline-lg uppercase z-10">Group B</h2>
+<span class="material-symbols-outlined text-4xl opacity-30 absolute right-4 -bottom-2 transform -rotate-12 z-0" data-icon="sports_soccer">sports_soccer</span>
+</header>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b-2 border-outline-variant font-label-data text-on-surface-variant text-xs uppercase bg-surface-container">
+<th class="p-3 w-8 text-center">#</th>
+<th class="p-3">Team</th>
+<th class="p-3 text-center">P</th>
+<th class="p-3 text-center">W</th>
+<th class="p-3 text-center">D</th>
+<th class="p-3 text-center">L</th>
+<th class="p-3 text-center">GD</th>
+<th class="p-3 text-center font-bold">Pts</th>
+</tr>
+</thead>
+<tbody class="font-body-md">
+<tr class="bg-secondary-container/30 border-b border-outline-variant border-l-4 border-l-primary relative">
+<td class="p-3 font-label-data text-center font-bold text-on-surface">1</td>
+<td class="p-3 flex items-center gap-3 font-title-md text-on-surface whitespace-nowrap">
+<div class="w-8 h-8 rounded-full bg-surface overflow-hidden border-2 border-outline shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)] shrink-0">
+<img alt="England Flag" class="w-full h-full object-cover" data-alt="A small circular emblem displaying the white flag with a red cross of England. The colors are highly saturated and slightly textured, matching a hand-drawn Risograph aesthetic. The emblem is cleanly framed with a dark, solid border, presenting a stylized national symbol suitable for a sports team badge in a light-mode UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9H013iImkpi5BqrBfKKO4qtYlt5zCIw_99e6MJuEzTPM6trtTKkFNv2gCc68umdVhS90jBTqdEjUQiqRKpyu3yMocpsFvLuwPiavDCfe7BJSW-EqDSzm1XTOa3KrBTZaA2m9LCzlIY0fHlIXhbKwjoIvbFQvNIyo13lk-49zvFZp5fvge0dQKeZ9IwytLJefVJ5nqNaIQDA-UfFCBjMkBQRQUBR46Q7G-iDQ95YsmoOXOofQ7U5MnRHSqB12cU93-AQibV2TTbGOS"/>
+</div>
+                                    England
+                                </td>
+<td class="p-3 text-center font-label-data">3</td>
+<td class="p-3 text-center font-label-data">2</td>
+<td class="p-3 text-center font-label-data">1</td>
+<td class="p-3 text-center font-label-data">0</td>
+<td class="p-3 text-center font-label-data">+7</td>
+<td class="p-3 text-center font-label-data font-bold text-primary text-base">7</td>
+</tr>
+<tr class="bg-secondary-container/10 border-b border-outline-variant border-l-4 border-l-primary/60">
+<td class="p-3 font-label-data text-center font-bold text-on-surface">2</td>
+<td class="p-3 flex items-center gap-3 font-title-md text-on-surface whitespace-nowrap">
+<div class="w-8 h-8 rounded-full bg-surface overflow-hidden border-2 border-outline shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)] shrink-0">
+<img alt="USA Flag" class="w-full h-full object-cover" data-alt="A small circular emblem featuring the stars and stripes of the USA flag. The colors are vibrant with a subtle stippled texture, conveying a crafted, muralist feel. The circular badge is outlined with a thick, hand-drawn style dark border, perfect for a lively, World Cup-themed sports application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQSrns5IvChqmCLO85pyf8VPQ1VpH8Oq5SsSQVTdD32lexb13jvFrJ_RYm3iEOK0cMePhcEK2scmb3AFTZ7btJT7MNetQTZs1dh4qavRRUFDJk1hCtDaDqymQNj_5bV0D0N7D8bXEnwXFM5KhvSvRTYY4x19uF42GDo2dyeOZFPhgvIuiZZiOn-hvad6j5n3MgYIqrISM1lubcHsy6TLHzVtsGYR2lWlYmsBdqTR93YCRpUvmoCTJKy5PvPe9glK-B5XIpio7PJFji"/>
+</div>
+                                    USA
+                                </td>
+<td class="p-3 text-center font-label-data">3</td>
+<td class="p-3 text-center font-label-data">1</td>
+<td class="p-3 text-center font-label-data">2</td>
+<td class="p-3 text-center font-label-data">0</td>
+<td class="p-3 text-center font-label-data">+1</td>
+<td class="p-3 text-center font-label-data font-bold text-primary text-base">5</td>
+</tr>
+<tr class="bg-surface-dim border-b border-outline-variant/50 border-l-4 border-l-transparent opacity-80">
+<td class="p-3 font-label-data text-center text-on-surface-variant">3</td>
+<td class="p-3 flex items-center gap-3 font-body-lg text-on-surface-variant whitespace-nowrap">
+<div class="w-8 h-8 rounded-full bg-surface overflow-hidden border border-outline opacity-80 shrink-0">
+<img alt="Iran Flag" class="w-full h-full object-cover" data-alt="A circular flag badge representing Iran, showing its green, white, and red horizontal stripes. The graphic has a slightly muted, warm terracotta undertone to signify an eliminated status, paired with a grainy, textured finish. The design fits within a bright, illustrated Latin American muralist design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2EHomD2mRIzr6X3yDcpbDGl6uoT_SQ_nXY9xJauYvbtwVRFWjnR89fXztV8SRzrDxRN8U02TpP4i9UVEgS1AeIcRVOqgoqingK6r7M6MJU--lARmEbHO4WP0ckvIRoICpgVS_mtWLnf3c1-bdyWLhTGi6ExhFdMfjFn_MgdWtkaX2pmv0XQAn-cVp3CDDpRmIwj_c9ddJfeUQk2dnNKC8mhyV4BBrnP-l1xuC_Z6B6gGozrVmKn11FknRzNNvOor88xKeYrZQYNfK"/>
+</div>
+                                    Iran
+                                </td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">3</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">1</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">0</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">2</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">-3</td>
+<td class="p-3 text-center font-label-data font-bold text-on-surface-variant text-base">3</td>
+</tr>
+<tr class="bg-surface-dim border-l-4 border-l-transparent opacity-60">
+<td class="p-3 font-label-data text-center text-on-surface-variant">4</td>
+<td class="p-3 flex items-center gap-3 font-body-lg text-on-surface-variant whitespace-nowrap">
+<div class="w-8 h-8 rounded-full bg-surface overflow-hidden border border-outline opacity-80 shrink-0">
+<img alt="Wales Flag" class="w-full h-full object-cover" data-alt="A circular badge displaying the white and green background with the red dragon of the Wales flag. The colors are intentionally desaturated with a warm grey overlay and a risograph stipple effect, indicating a bottom-tier position in the standings. It maintains a tactile, hand-crafted aesthetic suitable for a vibrant sports interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRfppCWczU9EQ0Q1uZUqdE7yYRQWgFM5Guc4NbaF0L8Oim1Acm6N9uRS4hF9PRmwzRSaBMir-jXGi6Q_Q4JaZpbjA_xGMMLJd9Omw6yeWW4eYpm1Ti4TXNz_Y36u-QuNd5RbnBaQeWm5AS83hoynYfFQRRX2sooDzzrEw7PweoeU6lG8zsE83sYhXongMfLQy26GTPfFck6XWJDaPKpK7eGqfDzY1y4fsrFMnZ8oCP4iI8FP4sYV21RLD9E-UAJMhxt2GH3rAvD-A5"/>
+</div>
+                                    Wales
+                                </td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">3</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">0</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">1</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">2</td>
+<td class="p-3 text-center font-label-data text-on-surface-variant">-5</td>
+<td class="p-3 text-center font-label-data font-bold text-on-surface-variant text-base">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-surface-container border-t-2 border-outline-variant shadow-[0_-4px_10px_rgba(0,0,0,0.05)] rounded-t-full md:hidden transition-all duration-200">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-body-md text-xs uppercase tracking-wider mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md text-xs uppercase tracking-wider mt-1">Fixtures</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="font-body-md text-xs uppercase tracking-wider mt-1">Live</span>
+</button>
+<!-- Active State for Standings/Table -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 shadow-[2px_2px_0px_0px_rgba(43,23,0,1)] active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="leaderboard" data-weight="fill" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-body-md text-xs font-bold uppercase tracking-wider mt-1 text-primary">Table</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-md text-xs uppercase tracking-wider mt-1">Profile</span>
+</button>
+</nav>
+</body></html>

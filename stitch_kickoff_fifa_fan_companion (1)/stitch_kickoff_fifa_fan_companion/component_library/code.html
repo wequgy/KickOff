@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KickOff - Component Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=Hanken+Grotesk:wght@400..800&amp;family=JetBrains+Mono:wght@400..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#865300",
+                        "inverse-on-surface": "#f8f0e1",
+                        "tertiary-container": "#9eb1c8",
+                        "secondary": "#006d38",
+                        "surface-bright": "#fff8ef",
+                        "surface-container-low": "#fbf3e4",
+                        "secondary-fixed": "#96f7b0",
+                        "on-tertiary-container": "#324457",
+                        "secondary-fixed-dim": "#7bda96",
+                        "on-tertiary-fixed-variant": "#36485c",
+                        "outline-variant": "#d8c3ad",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#865300",
+                        "surface-container-high": "#efe7d9",
+                        "on-surface-variant": "#534434",
+                        "on-background": "#1e1b13",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#e1d9cb",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e9e2d3",
+                        "tertiary-fixed-dim": "#b5c8e0",
+                        "on-surface": "#1e1b13",
+                        "background": "#fff8ef",
+                        "secondary-container": "#94f4ad",
+                        "primary-fixed": "#ffddb9",
+                        "primary-fixed-dim": "#ffb961",
+                        "on-primary-fixed": "#2b1700",
+                        "on-secondary-container": "#00723a",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#603a00",
+                        "surface-container-highest": "#e9e2d3",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#d1e4fc",
+                        "outline": "#867461",
+                        "surface-container": "#f5edde",
+                        "primary-container": "#f39c12",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#ffb961",
+                        "on-tertiary-fixed": "#091d2e",
+                        "surface": "#fff8ef",
+                        "inverse-surface": "#343026",
+                        "on-secondary-fixed": "#00210d",
+                        "on-secondary-fixed-variant": "#005228",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#663e00",
+                        "tertiary": "#4e6074",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "section-gap": "40px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Hanken Grotesk"],
+                        "title-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Bricolage Grotesque"],
+                        "display-lg": ["Bricolage Grotesque"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Bricolage Grotesque"],
+                        "label-data": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "label-data": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+            background-color: theme('colors.surface');
+        }
+        
+        .texture-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.08"/%3E%3C/svg%3E');
+            mix-blend-mode: multiply;
+        }
+
+        .drop-block {
+            box-shadow: 4px 4px 0px 0px theme('colors.tertiary');
+        }
+        
+        .drop-block-primary {
+            box-shadow: 4px 4px 0px 0px theme('colors.primary');
+        }
+
+        .ribbon-banner {
+            clip-path: polygon(5% 0, 95% 0, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
+        }
+        
+        .ticket-notch {
+            mask-image: radial-gradient(circle at 100% 50%, transparent 8px, black 8.5px);
+        }
+        
+        .ticket-perforation {
+            border-right: 2px dashed theme('colors.outline-variant');
+        }
+        
+        .organic-border {
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+        
+        .strikethrough-texture {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface antialiased min-h-screen pb-32">
+<!-- Top AppBar Component -->
+<header class="bg-surface-container-low border-b-4 border-primary shadow-[4px_4px_0px_0px_rgba(0,109,56,1)] fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16">
+<button class="p-2 text-primary hover:bg-primary-container hover:text-on-primary-container rounded-full transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu</span>
+</button>
+<h1 class="font-display-lg text-headline-lg-mobile text-primary tracking-tighter uppercase">KickOff</h1>
+<button class="w-10 h-10 rounded-full bg-tertiary-container overflow-hidden drop-block-primary border-2 border-primary">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3EC0FkMKUGUVjnC0y3ipq8lA0fbvh0JgIw0ssXR9vDxMvp72TvYnjVF9tm3ub-pDI455-F2vdjbPJfoQuGyt0NaHI_wLgtGiDHoRdmR6EdB3xNFMkSklDIZnCUKMeRwgoKmlioTb4OCmqXbsjHHr6RmuITrEXKIRIi-y695YSgyU7d0ZQJp2Z5548HrWVIwYJQtEQ18g0TPRhWqNkeDX5jEQw4e3PwnN5_5ttdie0fp1W7nCm7O8sgyBcMK2ieG_euTx_KdDTZ5G5"/>
+</button>
+</header>
+<main class="pt-24 px-container-margin max-w-7xl mx-auto space-y-16">
+<!-- Header -->
+<div class="text-center relative">
+<div class="inline-block relative">
+<div class="absolute inset-0 bg-primary-container translate-y-2 translate-x-2 rounded-lg mix-blend-multiply"></div>
+<h2 class="relative font-display-lg text-display-lg text-on-surface bg-surface-container-high px-8 py-4 rounded-lg border-4 border-on-surface drop-block z-10 organic-border">
+                    Component Library
+                </h2>
+</div>
+<p class="font-body-lg text-body-lg mt-6 text-on-surface-variant max-w-2xl mx-auto">
+                A tactile, illustrated design system inspired by Latin American muralism and the energy of the 2026 World Cup.
+            </p>
+</div>
+<!-- Section 1: Ribbons & Badges -->
+<section class="space-y-8">
+<h3 class="font-headline-lg text-headline-lg-mobile uppercase text-primary border-b-2 border-primary pb-2 inline-block">Headers &amp; Badges</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Ribbons -->
+<div class="space-y-8 p-8 bg-surface-container rounded-xl drop-block border-2 border-outline-variant relative overflow-hidden">
+<div class="texture-overlay"></div>
+<div class="relative z-10 flex justify-center">
+<div class="bg-tertiary text-on-tertiary px-12 py-3 ribbon-banner font-title-md text-title-md uppercase drop-block transform -rotate-2">
+                            Group Stage
+                        </div>
+</div>
+<div class="relative z-10 flex justify-center mt-8">
+<div class="bg-primary text-on-primary px-12 py-3 ribbon-banner font-title-md text-title-md uppercase drop-block transform rotate-1">
+                            Knockout Round
+                        </div>
+</div>
+</div>
+<!-- Badges -->
+<div class="space-y-8 p-8 bg-surface-container rounded-xl drop-block border-2 border-outline-variant relative overflow-hidden">
+<div class="texture-overlay"></div>
+<div class="relative z-10">
+<p class="font-label-data text-label-data text-on-surface-variant mb-4 uppercase">Status Pills</p>
+<div class="flex flex-wrap gap-4">
+<span class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-data text-label-data border-2 border-secondary drop-block">NEXT</span>
+<span class="bg-error-container text-on-error-container px-4 py-1 rounded-full font-label-data text-label-data border-2 border-error drop-block animate-pulse">LIVE</span>
+<span class="bg-surface-variant text-on-surface-variant px-4 py-1 rounded-full font-label-data text-label-data border-2 border-outline drop-block">FT</span>
+</div>
+</div>
+<div class="relative z-10 mt-8">
+<p class="font-label-data text-label-data text-on-surface-variant mb-4 uppercase">Team Badges</p>
+<div class="flex items-end gap-6">
+<!-- Small -->
+<div class="w-8 h-8 rounded-full bg-surface border-2 border-on-surface overflow-hidden flex items-center justify-center font-title-md text-sm">
+                                🇧🇷
+                            </div>
+<!-- Medium -->
+<div class="w-12 h-12 rounded-full bg-surface border-2 border-on-surface drop-block overflow-hidden flex items-center justify-center font-title-md text-lg">
+                                🇦🇷
+                            </div>
+<!-- Large -->
+<div class="w-16 h-16 rounded-full bg-surface border-4 border-on-surface drop-block overflow-hidden flex items-center justify-center font-display-lg text-2xl relative group">
+                                🇲🇽
+                                <div class="absolute -bottom-2 -right-2 bg-primary w-6 h-6 rounded-full border-2 border-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-primary">star</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Match Cards -->
+<section class="space-y-8">
+<h3 class="font-headline-lg text-headline-lg-mobile uppercase text-primary border-b-2 border-primary pb-2 inline-block">Match Ticket Cards</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Upcoming Card -->
+<div class="bg-surface border-2 border-on-surface rounded-xl flex drop-block relative group hover:-translate-y-1 transition-transform">
+<div class="w-3/4 p-4 ticket-perforation relative">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-data text-label-data text-on-surface-variant">Group A • Match 1</span>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded font-label-data text-[10px] border border-secondary">NEXT</span>
+</div>
+<div class="flex justify-between items-center px-2">
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full border-2 border-on-surface flex items-center justify-center text-xl bg-surface-variant mb-2">🇲🇽</div>
+<span class="font-title-md text-title-md">MEX</span>
+</div>
+<div class="font-display-lg text-headline-lg-mobile text-on-surface-variant opacity-50">VS</div>
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full border-2 border-on-surface flex items-center justify-center text-xl bg-surface-variant mb-2">🇨🇦</div>
+<span class="font-title-md text-title-md">CAN</span>
+</div>
+</div>
+</div>
+<div class="w-1/4 bg-surface-container-low rounded-r-xl flex flex-col items-center justify-center p-2 relative">
+<div class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-background rounded-full border-b-2 border-on-surface z-10"></div>
+<div class="absolute bottom-0 right-1/2 translate-x-1/2 translate-y-1/2 w-4 h-4 bg-background rounded-full border-t-2 border-on-surface z-10"></div>
+<span class="font-title-md text-title-md text-primary">15:00</span>
+<span class="font-label-data text-[10px] text-on-surface-variant uppercase text-center mt-1">12 Jun<br/>Azteca</span>
+</div>
+</div>
+<!-- Live Card -->
+<div class="bg-surface border-2 border-on-surface rounded-xl flex drop-block-primary relative group hover:-translate-y-1 transition-transform overflow-hidden">
+<div class="absolute inset-0 bg-primary opacity-5 pointer-events-none"></div>
+<div class="w-3/4 p-4 ticket-perforation relative">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-data text-label-data text-primary">Group G • Match 14</span>
+<span class="bg-error-container text-on-error-container px-2 py-0.5 rounded font-label-data text-[10px] border border-error animate-pulse flex items-center gap-1">
+<div class="w-1.5 h-1.5 bg-error rounded-full"></div> LIVE
+                            </span>
+</div>
+<div class="flex justify-between items-center px-2">
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full border-2 border-on-surface flex items-center justify-center text-xl bg-surface-variant mb-2">🇧🇷</div>
+<span class="font-title-md text-title-md">BRA</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-display-lg text-display-lg text-primary leading-none">2-1</span>
+<span class="font-label-data text-[10px] text-error mt-1">68'</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full border-2 border-on-surface flex items-center justify-center text-xl bg-surface-variant mb-2">🇨🇭</div>
+<span class="font-title-md text-title-md">SUI</span>
+</div>
+</div>
+</div>
+<div class="w-1/4 bg-primary-container rounded-r-xl flex flex-col items-center justify-center p-2 relative">
+<div class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-background rounded-full border-b-2 border-on-surface z-10"></div>
+<div class="absolute bottom-0 right-1/2 translate-x-1/2 translate-y-1/2 w-4 h-4 bg-background rounded-full border-t-2 border-on-surface z-10"></div>
+<button class="w-10 h-10 bg-on-primary-container text-primary-container rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<span class="font-label-data text-[10px] text-on-primary-container uppercase mt-2">Watch</span>
+</div>
+</div>
+<!-- Full Time Card -->
+<div class="bg-surface-variant border-2 border-outline rounded-xl flex relative opacity-80">
+<div class="texture-overlay"></div>
+<div class="w-3/4 p-4 ticket-perforation relative">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-data text-label-data text-on-surface-variant">Group C • Match 8</span>
+<span class="bg-surface-dim text-on-surface-variant px-2 py-0.5 rounded font-label-data text-[10px] border border-outline">FT</span>
+</div>
+<div class="flex justify-between items-center px-2">
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full border-2 border-outline flex items-center justify-center text-xl bg-surface-dim mb-2 opacity-50">🇦🇷</div>
+<span class="font-title-md text-title-md text-on-surface-variant">ARG</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-display-lg text-display-lg text-on-surface-variant leading-none">0-0</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 rounded-full border-2 border-outline flex items-center justify-center text-xl bg-surface-dim mb-2 opacity-50">🇸🇦</div>
+<span class="font-title-md text-title-md text-on-surface-variant">KSA</span>
+</div>
+</div>
+</div>
+<div class="w-1/4 bg-surface-dim rounded-r-xl flex flex-col items-center justify-center p-2 relative">
+<div class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-background rounded-full border-b-2 border-outline z-10"></div>
+<div class="absolute bottom-0 right-1/2 translate-x-1/2 translate-y-1/2 w-4 h-4 bg-background rounded-full border-t-2 border-outline z-10"></div>
+<span class="material-symbols-outlined text-outline mb-1">history</span>
+<span class="font-label-data text-[10px] text-on-surface-variant uppercase text-center mt-1">Highlights</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Goal Notification -->
+<section class="space-y-8">
+<h3 class="font-headline-lg text-headline-lg-mobile uppercase text-primary border-b-2 border-primary pb-2 inline-block">Goal Notification</h3>
+<div class="max-w-md mx-auto">
+<div class="bg-primary border-4 border-on-surface rounded-2xl drop-block-primary p-6 relative overflow-hidden text-on-primary">
+<!-- Botanical Background Elements (CSS approximations) -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-fixed-dim rounded-full mix-blend-overlay blur-xl -translate-y-1/2 translate-x-1/2"></div>
+<div class="absolute bottom-0 left-0 w-40 h-40 bg-inverse-primary rounded-full mix-blend-overlay blur-xl translate-y-1/3 -translate-x-1/3"></div>
+<div class="texture-overlay"></div>
+<div class="relative z-10 text-center space-y-4">
+<div class="inline-block bg-on-surface text-surface px-4 py-1 rounded-full font-label-data text-label-data uppercase tracking-widest mb-2 transform -rotate-2">
+                            GOAL! 72'
+                        </div>
+<div class="flex justify-center items-center gap-4">
+<span class="font-display-lg text-display-lg">🇧🇷</span>
+<h4 class="font-display-lg text-5xl tracking-tighter uppercase">Vini Jr.</h4>
+</div>
+<div class="bg-primary-container text-on-primary-container p-3 rounded-lg border-2 border-on-surface flex justify-between items-center transform rotate-1 mt-4">
+<span class="font-title-md text-title-md">BRA</span>
+<span class="font-display-lg text-headline-lg">2 - 0</span>
+<span class="font-title-md text-title-md">SRB</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Standings Table -->
+<section class="space-y-8">
+<h3 class="font-headline-lg text-headline-lg-mobile uppercase text-primary border-b-2 border-primary pb-2 inline-block">Group Standings Rows</h3>
+<div class="bg-surface border-2 border-on-surface rounded-xl overflow-hidden drop-block">
+<div class="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-4 p-4 border-b-2 border-outline-variant bg-surface-container font-label-data text-label-data text-on-surface-variant uppercase">
+<div class="w-6 text-center">Pos</div>
+<div>Team</div>
+<div class="w-8 text-center">P</div>
+<div class="w-8 text-center">GD</div>
+<div class="w-8 text-center">Pts</div>
+<div class="w-6"></div>
+</div>
+<!-- Qualifying Row -->
+<div class="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-4 p-4 items-center border-b-2 border-outline-variant bg-secondary-container/20 relative group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="w-6 text-center font-title-md text-title-md">1</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full border border-on-surface flex items-center justify-center bg-surface">🇦🇷</div>
+<span class="font-title-md text-title-md uppercase">Argentina</span>
+</div>
+<div class="w-8 text-center font-body-md">3</div>
+<div class="w-8 text-center font-body-md">+4</div>
+<div class="w-8 text-center font-title-md text-title-md">7</div>
+<div class="w-6 flex justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Standard Row -->
+<div class="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-4 p-4 items-center border-b-2 border-outline-variant bg-surface group">
+<div class="w-6 text-center font-title-md text-title-md text-on-surface-variant">2</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full border border-on-surface flex items-center justify-center bg-surface">🇵🇱</div>
+<span class="font-title-md text-title-md uppercase text-on-surface-variant">Poland</span>
+</div>
+<div class="w-8 text-center font-body-md text-on-surface-variant">3</div>
+<div class="w-8 text-center font-body-md text-on-surface-variant">0</div>
+<div class="w-8 text-center font-title-md text-title-md text-on-surface-variant">4</div>
+<div class="w-6"></div>
+</div>
+<!-- Eliminated Row -->
+<div class="grid grid-cols-[auto_1fr_auto_auto_auto_auto] gap-4 p-4 items-center bg-surface-dim strikethrough-texture opacity-75">
+<div class="w-6 text-center font-title-md text-title-md text-outline">4</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full border border-outline flex items-center justify-center bg-surface opacity-50 grayscale">🇸🇦</div>
+<span class="font-title-md text-title-md uppercase text-outline line-through">S. Arabia</span>
+</div>
+<div class="w-8 text-center font-body-md text-outline">3</div>
+<div class="w-8 text-center font-body-md text-outline">-3</div>
+<div class="w-8 text-center font-title-md text-title-md text-outline">3</div>
+<div class="w-6"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Nav Bar Component -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-surface-container border-t-2 border-outline-variant shadow-[0_-4px_10px_rgba(0,0,0,0.05)] rounded-t-full docked full-width md:hidden">
+<!-- Active Tab: Home -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 shadow-[2px_2px_0px_0px_rgba(43,23,0,1)] active:scale-95 transition-all duration-200 ease-in-out font-body-md text-body-md uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out font-body-md text-body-md uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined mb-1">calendar_today</span>
+<span class="text-[10px]">Fixtures</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out font-body-md text-body-md uppercase tracking-wider relative" href="#">
+<span class="material-symbols-outlined mb-1 text-error">sensors</span>
+<span class="text-[10px]">Live</span>
+<div class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full animate-ping"></div>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out font-body-md text-body-md uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined mb-1">leaderboard</span>
+<span class="text-[10px]">Table</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out font-body-md text-body-md uppercase tracking-wider" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="text-[10px]">Profile</span>
+</a>
+</nav>
+<!-- Desktop Nav Placeholder (Hidden on Mobile) -->
+<div class="hidden md:flex fixed bottom-0 w-full bg-surface-container py-2 text-center justify-center border-t border-outline-variant">
+<span class="font-label-data text-label-data text-on-surface-variant">Desktop view active (Bottom nav hidden)</span>
+</div>
+</body></html>

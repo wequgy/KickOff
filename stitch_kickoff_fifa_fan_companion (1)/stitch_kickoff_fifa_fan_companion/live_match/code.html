@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KickOff - Live Match</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Hanken+Grotesk:wght@500;700&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#865300",
+                        "inverse-on-surface": "#f8f0e1",
+                        "tertiary-container": "#9eb1c8",
+                        "secondary": "#006d38",
+                        "surface-bright": "#fff8ef",
+                        "surface-container-low": "#fbf3e4",
+                        "secondary-fixed": "#96f7b0",
+                        "on-tertiary-container": "#324457",
+                        "secondary-fixed-dim": "#7bda96",
+                        "on-tertiary-fixed-variant": "#36485c",
+                        "outline-variant": "#d8c3ad",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#865300",
+                        "surface-container-high": "#efe7d9",
+                        "on-surface-variant": "#534434",
+                        "on-background": "#1e1b13",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#e1d9cb",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e9e2d3",
+                        "tertiary-fixed-dim": "#b5c8e0",
+                        "on-surface": "#1e1b13",
+                        "background": "#fff8ef",
+                        "secondary-container": "#94f4ad",
+                        "primary-fixed": "#ffddb9",
+                        "primary-fixed-dim": "#ffb961",
+                        "on-primary-fixed": "#2b1700",
+                        "on-secondary-container": "#00723a",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#603a00",
+                        "surface-container-highest": "#e9e2d3",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#d1e4fc",
+                        "outline": "#867461",
+                        "surface-container": "#f5edde",
+                        "primary-container": "#f39c12",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#ffb961",
+                        "on-tertiary-fixed": "#091d2e",
+                        "surface": "#fff8ef",
+                        "inverse-surface": "#343026",
+                        "on-secondary-fixed": "#00210d",
+                        "on-secondary-fixed-variant": "#005228",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#663e00",
+                        "tertiary": "#4e6074",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "section-gap": "40px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Hanken Grotesk"],
+                        "title-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Bricolage Grotesque"],
+                        "display-lg": ["Bricolage Grotesque"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Bricolage Grotesque"],
+                        "label-data": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "26px", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-data": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100" height="100" filter="url(%23noise)" opacity="0.05"/%3E%3C/svg%3E');
+        }
+        .texture-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100" height="100" filter="url(%23noise)" opacity="0.1" mix-blend-mode="multiply"/%3E%3C/svg%3E');
+            z-index: 10;
+        }
+        .botanical-bg {
+            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBzRouCyj3wGQLR6e1e7ARVSs3ex4EQABkYDnAftXNhSXwcWKXW1paUCF_xSuTTctmkWJdKZiHmefdSfF8GSFAnr9rAno_s3WHSD6pXQIEG3o1pt9rg-Lg9sV7Pyx4ChEQ66RTe3Hq67OoVRbQgH5tGphqGGpHRpjp6GbUTTNbAgDZOw6POst8f4zIpg-l-Wx_vIYl-8xHiN9YbfylpcB05DAuphMBHaHLbkLusAeXN4HD54DbCf9WpCszn-5GLnYrYXczpoUAstpDC');
+            background-size: cover;
+            background-position: center;
+        }
+        .drop-block {
+            box-shadow: 4px 4px 0px 0px theme('colors.tertiary-fixed-dim');
+        }
+        .drop-block-primary {
+            box-shadow: 4px 4px 0px 0px theme('colors.primary');
+        }
+        .ribbon-banner {
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-24 relative overflow-x-hidden">
+<div class="texture-overlay"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface-container-low border-b-4 border-primary shadow-[4px_4px_0px_0px_rgba(0,109,56,1)]">
+<button class="text-primary hover:bg-primary-container hover:text-on-primary-container p-2 rounded-full transition-colors active:translate-y-1">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-display-lg text-headline-lg-mobile text-primary tracking-tighter uppercase">KickOff</h1>
+<button class="text-primary hover:bg-primary-container hover:text-on-primary-container p-2 rounded-full transition-colors active:translate-y-1">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</header>
+<main class="pt-24 px-container-margin max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Live Match Header -->
+<section class="col-span-1 md:col-span-12 relative rounded-xl overflow-hidden drop-block-primary border-2 border-primary mb-section-gap">
+<div class="absolute inset-0 botanical-bg opacity-80 mix-blend-multiply"></div>
+<div class="relative z-20 p-6 flex flex-col items-center justify-center min-h-[250px] bg-gradient-to-t from-primary-fixed-dim/90 to-transparent">
+<div class="bg-error text-on-error px-4 py-1 rounded-full font-label-data text-label-data uppercase tracking-widest mb-4 flex items-center gap-2 drop-block shadow-on-error-container">
+<span class="w-2 h-2 rounded-full bg-on-error animate-pulse"></span>
+                    78' LIVE
+                </div>
+<div class="flex justify-between w-full max-w-md items-center text-on-primary-fixed">
+<div class="flex flex-col items-center">
+<img alt="Argentina Flag" class="w-16 h-16 object-cover rounded-full border-4 border-surface drop-block" data-alt="A textured, hand-drawn illustration of the Argentina national flag. The colors are vibrant cerulean blue and white, with a golden sun in the center. The style mimics Latin American muralism with subtle stippling and visible brush strokes, evoking a festive, lively atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBr5CmBAqmilTEHXEPUgbRA_nmJoVDL7U2EDHnRXnNHzvDZPh8EmM7PMRGofmX9IgTN9Mn6IbxFPr_k3yZhJUNpNiIbDzKPzzYy8DDkn_0ohsyWFZn2EvzGJeYZ531yUlYcr4U1z_c1zQWXLWhUMxu_qV4w1Ysnp_WP-GMuDcnic_BkntEbe3fco2t51LKNOm37VjxoV2j1LE1qJwqRufx3ZOOK-JozNy0NtqUrfamj-FX3xgKqLJrQn9cL88ufb4t3A8SHsd06wei"/>
+<span class="font-headline-lg-mobile text-headline-lg-mobile mt-2 uppercase">ARG</span>
+</div>
+<div class="flex flex-col items-center mx-4">
+<span class="font-display-lg text-display-lg font-black tracking-tighter drop-shadow-md">2 - 2</span>
+</div>
+<div class="flex flex-col items-center">
+<img alt="France Flag" class="w-16 h-16 object-cover rounded-full border-4 border-surface drop-block" data-alt="A textured, hand-drawn illustration of the French national flag. The colors are deep navy blue, pristine white, and vibrant red. The style features a risograph texture and organic edges, avoiding sterile digital perfection, perfectly fitting a festive football celebration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-b4ZA7Av5ew5LgRtVTb5KBNA_BDAZTmenWZXuNAPzP2QVAv_BBennZz1ucYAqWbmBV6RPKK3ecPWqLhOEg7TFkW3lCscgsNJj7dgp0xf-5IfL8YtSk8OVJxJEqZYc_27fushORb37FTYSAI1q9fiH4vtlaJ9FtVeji_OsNojkPzw_Bwt9IeOTyb3hrFkEnzulKShPTy-TkTqAkCmjI08KenGvzHFeX30P0xlzh-tXlmzxUKB0UPjwnW4MG_iokHnq8f-JXT-0Y59h"/>
+<span class="font-headline-lg-mobile text-headline-lg-mobile mt-2 uppercase">FRA</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Match Timeline -->
+<section class="col-span-1 md:col-span-12 mb-section-gap">
+<div class="bg-surface-container p-6 rounded-xl border-2 border-outline drop-block relative">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-tertiary-fixed-dim text-on-tertiary-fixed px-6 py-1 ribbon-banner drop-block shadow-tertiary">
+<h2 class="font-title-md text-title-md uppercase text-center">Timeline</h2>
+</div>
+<div class="mt-6 relative h-16 flex items-center w-full">
+<!-- Main Line -->
+<div class="absolute w-full h-1 bg-outline-variant top-1/2 -translate-y-1/2"></div>
+<!-- Half Time Marker -->
+<div class="absolute h-4 w-1 bg-outline left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2"></div>
+<!-- Events (Positioned roughly by percentage) -->
+<div class="absolute left-[25%] top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center group cursor-pointer">
+<span class="material-symbols-outlined text-primary bg-surface-bright rounded-full p-1 border-2 border-primary drop-block shadow-primary text-xl" data-icon="sports_soccer">sports_soccer</span>
+<span class="absolute -bottom-6 font-label-data text-label-data text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">23' Messi</span>
+</div>
+<div class="absolute left-[40%] top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center group cursor-pointer">
+<div class="w-4 h-6 bg-primary-container border-2 border-on-surface drop-block shadow-on-surface -rotate-12"></div>
+<span class="absolute -top-8 font-label-data text-label-data text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">36' Romero</span>
+</div>
+<div class="absolute left-[65%] top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center group cursor-pointer">
+<span class="material-symbols-outlined text-secondary bg-surface-bright rounded-full p-1 border-2 border-secondary drop-block shadow-secondary text-xl" data-icon="sports_soccer">sports_soccer</span>
+<span class="absolute -bottom-6 font-label-data text-label-data text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">58' Mbappe</span>
+</div>
+<div class="absolute left-[78%] top-1/2 -translate-y-1/2 -translate-x-1/2 flex flex-col items-center">
+<div class="h-6 w-1 bg-error animate-pulse"></div>
+<span class="absolute -bottom-6 font-label-data text-label-data text-error font-bold">78'</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats -->
+<section class="col-span-1 md:col-span-12">
+<div class="bg-surface-container-high p-6 rounded-xl border-2 border-outline-variant relative overflow-hidden">
+<!-- Decorative botanical corner -->
+<div class="absolute -bottom-4 -right-4 w-32 h-32 opacity-20 botanical-bg rounded-full mix-blend-multiply"></div>
+<h2 class="font-headline-lg text-headline-lg text-center mb-8 uppercase text-primary tracking-tight">Match Stats</h2>
+<div class="space-y-6 max-w-2xl mx-auto relative z-10">
+<!-- Possession -->
+<div>
+<div class="flex justify-between font-label-data text-label-data mb-2">
+<span>52%</span>
+<span class="text-on-surface-variant uppercase">Possession</span>
+<span>48%</span>
+</div>
+<div class="flex h-4 w-full bg-surface-dim rounded-full overflow-hidden border border-outline-variant">
+<div class="bg-primary-container h-full" style="width: 52%"></div>
+<div class="bg-tertiary-container h-full" style="width: 48%"></div>
+</div>
+</div>
+<!-- Shots -->
+<div>
+<div class="flex justify-between font-label-data text-label-data mb-2">
+<span>12</span>
+<span class="text-on-surface-variant uppercase">Shots</span>
+<span>10</span>
+</div>
+<div class="flex h-4 w-full bg-surface-dim rounded-full overflow-hidden border border-outline-variant">
+<div class="bg-primary-container h-full flex-grow border-r border-surface" style="flex: 12"></div>
+<div class="bg-tertiary-container h-full flex-grow" style="flex: 10"></div>
+</div>
+</div>
+<!-- Passes -->
+<div>
+<div class="flex justify-between font-label-data text-label-data mb-2">
+<span>450</span>
+<span class="text-on-surface-variant uppercase">Passes</span>
+<span>432</span>
+</div>
+<div class="flex h-4 w-full bg-surface-dim rounded-full overflow-hidden border border-outline-variant">
+<div class="bg-primary-container h-full flex-grow border-r border-surface" style="flex: 450"></div>
+<div class="bg-tertiary-container h-full flex-grow" style="flex: 432"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 bg-surface-container border-t-2 border-outline-variant rounded-t-full shadow-[0_-4px_10px_rgba(0,0,0,0.05)] md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-body-md text-xs uppercase tracking-wider mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md text-xs uppercase tracking-wider mt-1">Fixtures</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 shadow-[2px_2px_0px_0px_rgba(43,23,0,1)] active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="font-body-md text-xs uppercase tracking-wider mt-1 font-bold">Live</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="font-body-md text-xs uppercase tracking-wider mt-1">Table</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors active:scale-95 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-md text-xs uppercase tracking-wider mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

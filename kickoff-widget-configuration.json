@@ -1,0 +1,15 @@
+{
+  "widgetWidth": "348px",
+  "widgetHeight": "160px",
+  "teams": {
+    "home": "ECU",
+    "away": "SEN"
+  },
+  "timerSecondsRemaining": 156,
+  "venue": "Estadio Azteca",
+  "groupHeader": "GROUP A",
+  "aestheticFlags": {
+    "noise": true,
+    "botanical": true
+  }
+}

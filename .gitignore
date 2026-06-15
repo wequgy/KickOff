@@ -1,0 +1,31 @@
+# Gradle files
+.gradle/
+build/
+**/build/
+**/.gradle/
+
+# Android Studio / IntelliJ files
+.idea/
+**/.idea/
+*.iml
+*.ipr
+*.iws
+
+# Local configuration
+local.properties
+**/local.properties
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Output APKs / Bundle files
+*.apk
+*.aar
+*.ap_
+
+# Screenshots & captures
+screencap*.png
+screenshot*.png
+screencap.png
+screenshot.png

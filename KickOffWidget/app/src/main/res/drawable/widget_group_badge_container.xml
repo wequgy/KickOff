@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Back layer: Shadow -->
+    <item
+        android:left="2dp"
+        android:top="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/on_primary_fixed" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+
+    <!-- Front layer: Border + Background -->
+    <item
+        android:right="2dp"
+        android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/secondary_fixed_dim" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/secondary" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+</layer-list>

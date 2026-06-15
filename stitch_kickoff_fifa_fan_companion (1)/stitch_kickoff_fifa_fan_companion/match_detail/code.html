@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Match Detail - KickOff</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Bricolage Grotesque & Hanken Grotesk -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800&amp;family=Hanken+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#865300",
+                        "inverse-on-surface": "#f8f0e1",
+                        "tertiary-container": "#9eb1c8",
+                        "secondary": "#006d38",
+                        "surface-bright": "#fff8ef",
+                        "surface-container-low": "#fbf3e4",
+                        "secondary-fixed": "#96f7b0",
+                        "on-tertiary-container": "#324457",
+                        "secondary-fixed-dim": "#7bda96",
+                        "on-tertiary-fixed-variant": "#36485c",
+                        "outline-variant": "#d8c3ad",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#865300",
+                        "surface-container-high": "#efe7d9",
+                        "on-surface-variant": "#534434",
+                        "on-background": "#1e1b13",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#e1d9cb",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e9e2d3",
+                        "tertiary-fixed-dim": "#b5c8e0",
+                        "on-surface": "#1e1b13",
+                        "background": "#fff8ef",
+                        "secondary-container": "#94f4ad",
+                        "primary-fixed": "#ffddb9",
+                        "primary-fixed-dim": "#ffb961",
+                        "on-primary-fixed": "#2b1700",
+                        "on-secondary-container": "#00723a",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#603a00",
+                        "surface-container-highest": "#e9e2d3",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#d1e4fc",
+                        "outline": "#867461",
+                        "surface-container": "#f5edde",
+                        "primary-container": "#f39c12",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#ffb961",
+                        "on-tertiary-fixed": "#091d2e",
+                        "surface": "#fff8ef",
+                        "inverse-surface": "#343026",
+                        "on-secondary-fixed": "#00210d",
+                        "on-secondary-fixed-variant": "#005228",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#663e00",
+                        "tertiary": "#4e6074",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "unit": "8px",
+                        "section-gap": "40px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Hanken Grotesk"],
+                        "title-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Bricolage Grotesque"],
+                        "display-lg": ["Bricolage Grotesque"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Bricolage Grotesque"],
+                        "label-data": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "500"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "label-data": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Grain & Texture utility classes */
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+        
+        /* Graphic Offset utility for tactile depth */
+        .shadow-hard {
+            box-shadow: 4px 4px 0px 0px rgba(0, 109, 56, 1); /* Indigo/Dark Green offset */
+        }
+        
+        /* Ribbon Banner utility */
+        .ribbon-banner {
+            position: relative;
+            background-color: #00210d; /* Indigo/Dark background */
+            color: #fff8ef;
+            padding: 8px 32px;
+            display: inline-block;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            transform: rotate(-2deg);
+        }
+        
+        .texture-blend {
+            mix-blend-mode: multiply;
+        }
+
+        /* Prevent body scrolling behind sticky navs */
+        body { padding-top: 64px; padding-bottom: 80px; }
+        
+        /* Botanical illustration placeholders */
+        .bg-botanical-pattern {
+            background-color: #fbf3e4;
+            background-image: radial-gradient(#94f4ad 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased bg-noise">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface-container-low dark:bg-surface-dim border-b-4 border-primary shadow-[4px_4px_0px_0px_rgba(0,109,56,1)] transition-all duration-100">
+<button class="text-primary dark:text-primary-fixed hover:bg-primary-container dark:hover:bg-primary-fixed-dim hover:text-on-primary-container p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-display-lg text-headline-lg-mobile text-primary dark:text-primary-fixed tracking-tighter uppercase font-bold">Match Detail</h1>
+<div class="w-10 h-10 rounded-full bg-tertiary-container overflow-hidden border-2 border-primary shadow-hard">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto w-full px-container-margin py-section-gap flex flex-col gap-section-gap relative">
+<!-- Decorative Botanical Wings (Desktop) -->
+<div class="hidden md:block absolute top-0 left-[-100px] w-64 h-[800px] bg-botanical-pattern opacity-30 -z-10 rounded-r-full"></div>
+<div class="hidden md:block absolute top-40 right-[-100px] w-64 h-[600px] bg-botanical-pattern opacity-30 -z-10 rounded-l-full"></div>
+<!-- Header: Illustrated Match Panel -->
+<section class="relative w-full rounded-xl overflow-hidden border-4 border-secondary shadow-[8px_8px_0px_0px_rgba(0,109,56,1)] bg-primary-fixed min-h-[300px] flex flex-col items-center justify-center p-unit">
+<!-- Texture Overlay -->
+<div class="absolute inset-0 bg-noise opacity-50 z-10 pointer-events-none"></div>
+<!-- Illustrated Background (Placeholder for rich botanical texture) -->
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-80" data-alt="Vibrant, hand-drawn illustration depicting a celebratory stadium atmosphere with lush botanical elements. Warm golden and terracotta tones dominate, textured with risograph-style grain. Large floral motifs and swirling ribbons surround the central focal point, creating a festive, Latin American muralism inspired aesthetic. Light mode, bright, organic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzRouCyj3wGQLR6e1e7ARVSs3ex4EQABkYDnAftXNhSXwcWKXW1paUCF_xSuTTctmkWJdKZiHmefdSfF8GSFAnr9rAno_s3WHSD6pXQIEG3o1pt9rg-Lg9sV7Pyx4ChEQ66RTe3Hq67OoVRbQgH5tGphqGGpHRpjp6GbUTTNbAgDZOw6POst8f4zIpg-l-Wx_vIYl-8xHiN9YbfylpcB05DAuphMBHaHLbkLusAeXN4HD54DbCf9WpCszn-5GLnYrYXczpoUAstpDC"/>
+<div class="relative z-20 flex flex-col items-center text-center gap-unit bg-surface-bright/80 p-gutter rounded-lg border-2 border-primary shadow-hard backdrop-blur-sm mt-8">
+<div class="ribbon-banner font-headline-lg-mobile uppercase tracking-wider shadow-md -mt-10 mb-4 bg-on-surface text-surface">
+                    Group Stage
+                </div>
+<div class="flex items-center justify-center gap-gutter w-full">
+<!-- Team A -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-20 h-20 rounded-full bg-surface border-4 border-primary shadow-hard flex items-center justify-center overflow-hidden">
+<span class="font-display-lg text-primary text-3xl">BRA</span>
+</div>
+<span class="font-title-md uppercase">Brazil</span>
+</div>
+<!-- VS -->
+<div class="flex flex-col items-center">
+<span class="font-display-lg text-secondary text-4xl mx-4 opacity-80">VS</span>
+</div>
+<!-- Team B -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-20 h-20 rounded-full bg-surface border-4 border-primary shadow-hard flex items-center justify-center overflow-hidden">
+<span class="font-display-lg text-primary text-3xl">ARG</span>
+</div>
+<span class="font-title-md uppercase">Argentina</span>
+</div>
+</div>
+<!-- Countdown -->
+<div class="mt-4 bg-primary text-on-primary px-6 py-2 rounded-full border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(30,27,19,1)] font-label-data text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Starts in 02:45:10</span>
+</div>
+</div>
+</section>
+<!-- Head-to-Head Section -->
+<section class="flex flex-col gap-gutter relative z-20">
+<div class="flex items-center justify-center">
+<h2 class="ribbon-banner font-headline-lg-mobile text-xl md:text-2xl uppercase tracking-wider bg-secondary text-on-secondary shadow-hard">
+                    Head-to-Head
+                </h2>
+</div>
+<div class="bg-surface-container border-2 border-outline shadow-hard rounded-xl p-gutter flex flex-col gap-2">
+<!-- Match Row 1 -->
+<div class="flex items-center justify-between p-3 border-b-2 border-outline-variant hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3 w-1/3">
+<span class="font-label-data text-xs text-on-surface-variant">12 OCT 23</span>
+</div>
+<div class="flex items-center justify-center gap-4 w-1/3">
+<span class="font-title-md">BRA</span>
+<span class="font-headline-lg text-primary bg-primary-fixed px-3 py-1 rounded-md border border-primary">2 - 1</span>
+<span class="font-title-md opacity-70">ARG</span>
+</div>
+<div class="w-1/3 text-right">
+<span class="text-xs font-label-data text-on-surface-variant bg-surface-container-highest px-2 py-1 rounded">WCQ</span>
+</div>
+</div>
+<!-- Match Row 2 -->
+<div class="flex items-center justify-between p-3 border-b-2 border-outline-variant hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3 w-1/3">
+<span class="font-label-data text-xs text-on-surface-variant">05 SEP 21</span>
+</div>
+<div class="flex items-center justify-center gap-4 w-1/3">
+<span class="font-title-md opacity-70">BRA</span>
+<span class="font-headline-lg text-secondary bg-secondary-fixed px-3 py-1 rounded-md border border-secondary">0 - 1</span>
+<span class="font-title-md">ARG</span>
+</div>
+<div class="w-1/3 text-right">
+<span class="text-xs font-label-data text-on-surface-variant bg-surface-container-highest px-2 py-1 rounded">Copa</span>
+</div>
+</div>
+<!-- Match Row 3 -->
+<div class="flex items-center justify-between p-3 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3 w-1/3">
+<span class="font-label-data text-xs text-on-surface-variant">15 NOV 19</span>
+</div>
+<div class="flex items-center justify-center gap-4 w-1/3">
+<span class="font-title-md opacity-70">BRA</span>
+<span class="font-headline-lg text-secondary bg-secondary-fixed px-3 py-1 rounded-md border border-secondary">0 - 1</span>
+<span class="font-title-md">ARG</span>
+</div>
+<div class="w-1/3 text-right">
+<span class="text-xs font-label-data text-on-surface-variant bg-surface-container-highest px-2 py-1 rounded">Friendly</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Lineup Section -->
+<section class="flex flex-col gap-gutter">
+<div class="flex items-center justify-center">
+<h2 class="ribbon-banner font-headline-lg-mobile text-xl md:text-2xl uppercase tracking-wider bg-primary text-on-primary shadow-hard transform rotate-1">
+                    Predicted Lineups
+                </h2>
+</div>
+<div class="relative w-full aspect-[3/4] md:aspect-square bg-secondary border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(30,27,19,1)] rounded-xl overflow-hidden bg-noise">
+<!-- Pitch Lines (Simplified) -->
+<div class="absolute inset-4 border-2 border-secondary-fixed opacity-50 pointer-events-none"></div>
+<div class="absolute top-1/2 left-0 w-full border-t-2 border-secondary-fixed opacity-50 pointer-events-none"></div>
+<div class="absolute top-1/2 left-1/2 w-24 h-24 -translate-x-1/2 -translate-y-1/2 border-2 border-secondary-fixed rounded-full opacity-50 pointer-events-none"></div>
+<div class="absolute top-4 left-1/2 -translate-x-1/2 w-1/2 h-16 border-2 border-t-0 border-secondary-fixed opacity-50 pointer-events-none"></div>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-1/2 h-16 border-2 border-b-0 border-secondary-fixed opacity-50 pointer-events-none"></div>
+<!-- Team A Players (Top) - Example 4-3-3 -->
+<div class="absolute top-[10%] left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary border-2 border-surface flex items-center justify-center font-label-data text-xs shadow-hard">1</div>
+</div>
+<div class="absolute top-[25%] left-0 w-full flex justify-around px-8">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary border-2 border-surface flex items-center justify-center font-label-data text-xs shadow-hard">2</div>
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary border-2 border-surface flex items-center justify-center font-label-data text-xs shadow-hard">3</div>
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary border-2 border-surface flex items-center justify-center font-label-data text-xs shadow-hard">4</div>
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary border-2 border-surface flex items-center justify-center font-label-data text-xs shadow-hard">6</div>
+</div>
+<!-- Team B Players (Bottom) - Example 4-2-3-1 -->
+<div class="absolute bottom-[10%] left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
+<div class="w-8 h-8 rounded-full bg-inverse-surface text-surface border-2 border-surface flex items-center justify-center font-label-data text-xs shadow-hard">23</div>
+</div>
+<div class="absolute bottom-[25%] left-0 w-full flex justify-around px-8">
+<div class="w-8 h-8 rounded-full bg-inverse-surface text-surface border-2 border-surface flex items-center justify-center font-label-data text-xs shadow-hard">26</div>
+<div class="w-8 h-8 rounded-full bg-inverse-surface text-surface border-2 border-surface flex items-center justify-center font-label-data text-xs shadow-hard">13</div>
+<div class="w-8 h-8 rounded-full bg-inverse-surface text-surface border-2 border-surface flex items-center justify-center font-label-data text-xs shadow-hard">19</div>
+<div class="w-8 h-8 rounded-full bg-inverse-surface text-surface border-2 border-surface flex items-center justify-center font-label-data text-xs shadow-hard">3</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full p-4 bg-surface-container-high border-t-2 border-outline-variant shadow-[0_-10px_20px_rgba(0,0,0,0.05)] z-50 md:hidden">
+<button class="w-full bg-primary-container text-on-primary-container font-headline-lg-mobile uppercase text-xl py-4 rounded-lg border-2 border-on-surface shadow-[4px_4px_0px_0px_rgba(30,27,19,1)] active:translate-y-1 active:shadow-[0px_0px_0px_0px_rgba(30,27,19,1)] transition-all flex justify-center items-center gap-2">
+<span class="material-symbols-outlined">notifications_active</span>
+            Set Reminder
+        </button>
+</div>
+<!-- BottomNavBar (Hidden on this transactional match detail screen per instructions, action button replaces it) -->
+<!-- Suppressed: The "Destination" Rule / Task-Focused -->
+</body></html>
