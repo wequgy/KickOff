@@ -43,3 +43,29 @@ data class GoalsInfo(
     val home: Int? = null,
     val away: Int? = null
 )
+
+@Serializable
+data class StandingsResponse(
+    val standings: List<StandingItem>
+)
+
+@Serializable
+data class StandingItem(
+    val stage: String? = null,
+    val type: String? = null,
+    val group: String? = null,
+    val table: List<TableItem>
+)
+
+@Serializable
+data class TableItem(
+    val position: Int,
+    val team: TeamInfo,
+    val playedGames: Int,
+    val won: Int,
+    val draw: Int,
+    val lost: Int,
+    val points: Int,
+    val goalDifference: Int
+)
+
